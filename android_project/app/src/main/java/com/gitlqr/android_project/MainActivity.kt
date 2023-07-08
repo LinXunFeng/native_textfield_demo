@@ -15,18 +15,23 @@ class MainActivity : AppCompatActivity() {
         val etTest = findViewById<EditText>(R.id.etTest)
         etTest.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
-                log("beforeTextChanged: ${s}, start = ${start}, count = ${count}, after = ${after}")
+                // log("beforeTextChanged: ${s}, start = ${start}, count = ${count}, after = ${after}")
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                val isComposition = isComposition(s)
-                log("onTextChanged: ${s}, start = ${start}, before = ${before}, count = ${count}, isComposition = ${isComposition}")
+                // val isComposition = isComposition(s)
+                // log("onTextChanged: ${s}, start = ${start}, before = ${before}, count = ${count}, isComposition = ${isComposition}")
             }
 
             override fun afterTextChanged(s: Editable?) {
                 val isComposition = isComposition(s)
-                log("afterTextChanged: ${s?.toString()}, length = ${etTest.length()}, isComposition = ${isComposition}")
-                log("==================================")
+                // log("afterTextChanged: ${s?.toString()}, length = ${etTest.length()}, isComposition = ${isComposition}")
+                // log("==================================")
+                if (isComposition) {
+                    log("isComposition: ${s?.toString()}")
+                } else {
+                    log("text: ${s?.toString()}")
+                }
             }
         })
     }
@@ -55,11 +60,11 @@ class MainActivity : AppCompatActivity() {
         val isNormalized = composeEnd >= composeBegin
 
         val isComposingRangeValid = isValid && isNormalized && composeEnd <= source.length
-        log("composeBegin = ${composeBegin}, composeEnd = ${composeEnd}, isComposingRangeValid = ${isComposingRangeValid}")
+        // log("composeBegin = ${composeBegin}, composeEnd = ${composeEnd}, isComposingRangeValid = ${isComposingRangeValid}")
         return isComposingRangeValid
     }
 
     fun log(msg: String) {
-        Log.e("lqr", msg)
+        Log.e("lqr", "EditText: ${msg}")
     }
 }
